@@ -9,6 +9,30 @@ palettes](https://www.southampton.ac.uk/brand/category/colour/) of
 The code is largely re-purposed from the [ochRe
 package](https://github.com/ropenscilabs/ochRe)
 
+It has two functions for use with `ggplot2`, either as discrete colours
+or gradients:
+
+  - `scale_fill_uos()`
+  - `scale_colour_uos()`
+
+and the palettes can be called in the base plotting functions too. See
+examples below.
+
+## Installation
+
+Use can install from github using `devtools`. Run
+`install.packages("devtools")` if necessary first.
+
+``` r
+devtools::install_github("ab604/sotoncolours")
+```
+
+and then load the library as usual:
+
+``` r
+library(sotoncolours)
+```
+
 ## The palettes
 
 ``` r
@@ -26,6 +50,7 @@ for (i in 1:length(uos_palettes)){
 
 Here is an example using [Alison Horst’s Palmer Penguins
 dataset](https://github.com/allisonhorst/palmerpenguins) and `ggplot2`
+and `scale_fill_uos()`
 
 ``` r
 library(palmerpenguins)
