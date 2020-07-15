@@ -36,18 +36,16 @@ scale_colour_uos(
 Setup colour palette for ggplot2
 }
 \examples{
-\dontrun{
 library(tidyverse)
-ggplot(mtcars, aes(mpg, wt)) + 
-  geom_point(aes(colour = factor(cyl))) +     
+ggplot(mtcars, aes(mpg, wt)) +
+  geom_point(aes(colour = factor(cyl))) +
   scale_colour_uos(palette="marine")
-ggplot(mtcars, aes(mpg, wt)) + 
-  geom_point(aes(colour = hp)) +     
+ggplot(mtcars, aes(mpg, wt)) +
+  geom_point(aes(colour = hp)) +
   scale_colour_uos(palette="horizon", discrete = FALSE)
-ggplot(data = mpg) + 
+ggplot(data = mpg) +
   geom_point(mapping = aes(x = displ, y = hwy, color = class)) +
   scale_colour_uos(palette="marine")
 ggplot(diamonds) + geom_bar(aes(x = cut, fill = clarity)) +
   scale_fill_uos()
-  }
 }

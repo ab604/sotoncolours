@@ -21,16 +21,17 @@ contrast1
 contrast2
 contrast3
 }
+\details{
+Make a named list of University of Southampton brand colours
+}
 \examples{
-\dontrun{
 #' # Make an x-y plot using the marine palette
 library(tidyverse)
-df <- data.frame(x = rnorm(100, 0, 20), 
-          y = rnorm(100, 0, 20), 
+df <- data.frame(x = rnorm(100, 0, 20),
+          y = rnorm(100, 0, 20),
           cl = sample(letters[1:8], 100, replace=TRUE))
-ggplot(df, aes(x, y, colour=cl, shape=cl)) + 
+ggplot(df, aes(x, y, colour=cl, shape=cl)) +
   geom_point(size=4) + scale_colour_uos() +
-  theme_bw() + theme(aspect.ratio=1) 
-}
+  theme_bw() + theme(aspect.ratio=1)
 }
 \keyword{datasets}

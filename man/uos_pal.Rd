@@ -17,11 +17,8 @@ uos_pal(palette = "marine", alpha = 1, reverse = FALSE)
 uos palette with ramped colours
 }
 \examples{
-\dontrun{
 library(scales)
 show_col(uos_pal()(10))
 
 filled.contour(volcano,color.palette = uos_pal(), asp=1)
-}
-#' @export
 }

@@ -20,7 +20,10 @@ It has two functions for use with `ggplot2`, either as discrete colours or gradi
 + `scale_fill_uos()`
 + `scale_colour_uos()`
 
-and the palettes can be called in the base plotting functions too. See examples below.
+and the palettes or specific colours can be called using `uos_cols()` and in the 
+base plotting functions too. 
+
+See examples below and more details in the vignette.
 
 ## Installation
 
@@ -39,7 +42,7 @@ library(sotoncolours)
 
 ## The palettes
 
-```{r show_palettes, fig.height= 8}
+```{r show_palettes}
 pal_names <- names(uos_palettes)
 
 par(mfrow=c(length(uos_palettes)/2, 2), lheight = 2, mar=rep(1, 4), adj = 0)

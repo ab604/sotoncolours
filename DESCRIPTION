@@ -18,5 +18,9 @@ Suggests: knitr,
     dichromat,
     scales,
     tidyverse,
+    patchwork,
+    palmerpenguins,
     raster,
-    gridExtra
+    gridExtra,
+    qpdf
+VignetteBuilder: knitr
