@@ -1,20 +1,10 @@
----
-title: "Using the University of Southampton colour palettes"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Using the University of Southampton colour palettes}
-  %\VignetteEngine{knitr::rmarkdown}
-  \usepackage[utf8]{inputenc}
----
-
-```{r setup, echo = FALSE, message = FALSE}
+## ----setup, echo = FALSE, message = FALSE-------------------------------------
 knitr::opts_chunk$set(fig.width = 7, 
                       echo = FALSE, 
                       warning = FALSE, 
                       message=FALSE)
-```
 
-```{r set-up, echo=TRUE}
+## ----set-up, echo=TRUE--------------------------------------------------------
 library(tidyverse)
 library(sotoncolours)
 library(dichromat)
@@ -22,107 +12,59 @@ library(colorspace)
 library(palmerpenguins)
 library(raster)
 library(patchwork)
-```
 
-# Introduction
+## ----install, eval=FALSE, echo=TRUE-------------------------------------------
+#  devtools::install_github("ab604/sotoncolours", build_vignettes = TRUE)
 
-The [**sotoncolours**](https://github.com/ab604/sotoncolours) package contains colour palettes based on the University of Southampton colour scheme.
-
-# Installation
-
-```{r install, eval=FALSE, echo=TRUE}
-devtools::install_github("ab604/sotoncolours", build_vignettes = TRUE)
-```
-
-# Colour and palette choices
-
-The package contains 19 colours and 7 colour palettes.
-
-```{r colours, echo=TRUE}
+## ----colours, echo=TRUE-------------------------------------------------------
 # Names of the colours
 names(uos_cols())
-```
 
-
-```{r palettes, echo=TRUE}
+## ----palettes, echo=TRUE------------------------------------------------------
 # See names of all palettes
 names(uos_palettes)
-```
 
-To see the colours in a palette by name
-
-```{r palette-colour, echo=TRUE}
+## ----palette-colour, echo=TRUE------------------------------------------------
 # See names of all palettes
 names(uos_palettes$contrast1)
-```
 
-```{r see-palettes, fig.height = 8}
+## ----see-palettes, fig.height = 8---------------------------------------------
 pal_names <- names(uos_palettes)
 par(mfrow=c(length(uos_palettes)/2, 2), lheight = 2, mar=rep(1, 4), adj = 0)
 for (i in 1:length(uos_palettes)){
     viz_palette(uos_palettes[[i]], pal_names[i])
 }
-```
 
-## Colour vision impairment
-These plots show how each of the palettes perform for different types of colour vision impairment (using dichromat).
-
-### Green-Blind (Deuteranopia)
-
-```{r dichromate_deat, fig.height = 5}
+## ----dichromate_deat, fig.height = 5------------------------------------------
 par(mfrow=c(length(uos_palettes)/2, 2), lheight = 2, mar=rep(1, 4), adj = 0)
 for (i in 1:length(uos_palettes)){
     viz_palette(dichromat(uos_palettes[[i]], "deutan"), pal_names[i])
 }
-```
 
-
-### Red-Blind (Protanopia)
-
-```{r dichromate_protan, fig.height = 5}
+## ----dichromate_protan, fig.height = 5----------------------------------------
 par(mfrow=c(length(uos_palettes)/2, 2), lheight = 2, mar=rep(1, 4), adj = 0)
 for (i in 1:length(uos_palettes)){
     viz_palette(dichromat(uos_palettes[[i]], "protan"), pal_names[i])
 }
-```
 
-
-### Blue-Blind (Tritanopia)
-
-```{r dichromate_tritan, fig.height = 5}
+## ----dichromate_tritan, fig.height = 5----------------------------------------
 par(mfrow=c(length(uos_palettes)/2, 2), lheight = 2, mar=rep(1, 4), adj = 0)
 for (i in 1:length(uos_palettes)){
     viz_palette(dichromat(uos_palettes[[i]], "tritan"), pal_names[i])
 }
-```
 
-
-### Desaturated
-
-```{r desaturate, fig.height = 5}
+## ----desaturate, fig.height = 5-----------------------------------------------
 par(mfrow=c(length(uos_palettes)/2, 2), lheight = 2, mar=rep(1, 4), adj = 0)
 for (i in 1:length(uos_palettes)){
     viz_palette(desaturate(uos_palettes[[i]]), pal_names[i])
 }
-```
 
-# Usage
-
-Colours can be called directly using `uos_cols()` with a character argument
-for the colour name e.g. `"horizon5"`.
-
-```{r, echo=TRUE}
+## ---- echo=TRUE---------------------------------------------------------------
 ggplot(mtcars, aes(hp, mpg)) +
     geom_point(color = uos_cols("horizon5"),
                size = 4, alpha = .8)
-```
 
-The package contains color scale functions for **ggplot2**
-plots: `scale_color_uos()` and `scale_fill_uos()` calling one of the palettes. 
-
-Here the `marine` and `horizon5` palettes are used for a scatter plot of `mtcars` data.
-
-```{r mtcars, echo = TRUE, message = FALSE}
+## ----mtcars, echo = TRUE, message = FALSE-------------------------------------
 # Use the marine palette for colours
 p1 <- ggplot(mtcars, aes(mpg, wt)) + 
    geom_point(aes(colour = factor(cyl)), size=2, alpha=0.7) + 
@@ -138,26 +80,14 @@ p2 <- ggplot(data = mpg) +
     theme(aspect.ratio=1, legend.position="bottom")
 
 p1 + p2
-```
 
-Here the default palette `marine` is used in a stacked bar chart using the `diamonds` data. 
-
-```{r diamonds, echo=TRUE, message=FALSE}
+## ----diamonds, echo=TRUE, message=FALSE---------------------------------------
  ggplot(diamonds) + 
   geom_bar(aes(x = cut, fill = clarity)) +
   scale_fill_uos() +  # defaults to marine
   theme_bw() 
-```
 
-It's possible, but messy, to pick any colour combination using `uos_cols()`,
-but the syntax requires extracting the hex colour values using `unname()` and
-passing a vector of colour names as the index to `uos_cols()`
-
-Here's an example with the Palmer penguin data using
-`uos_cols()` as described above by creating a new palette called `my_cols` 
-that is passed to `scale_colour_manual()`.
-
-```{r maps, echo=TRUE, message=FALSE}
+## ----maps, echo=TRUE, message=FALSE-------------------------------------------
 # Create a new vector of colours to pass to scale_colour manual
 # Use unname() to get hex codes from uos_cols()
 my_cols <- unname(uos_cols()[c('black','shamrock','horizon4')])
@@ -170,22 +100,15 @@ ggplot(data = penguins, aes(x = species, y = flipper_length_mm)) +
   theme_minimal() +
   labs(x = "Species",
        y = "Flipper length (mm)")
-```
 
-Here is a base R `plot` using the `horizon` palette directly via the `colorRampPalette()` function.
-
-```{r base-plot, echo=TRUE}
+## ----base-plot, echo=TRUE-----------------------------------------------------
 pal <- colorRampPalette(uos_palettes[["horizon"]])
 image(volcano, col = pal(20))
-```
 
-Here is the same plot, but by creating a new palette from specific colours
-as with the penguin data.
-
-```{r base-plot-2, echo=TRUE}
+## ----base-plot-2, echo=TRUE---------------------------------------------------
 # Create new palette
 my_cols <- unname(uos_cols()[c('marine1','shamrock','horizon3')])
 
 pal <- colorRampPalette(my_cols)
 image(volcano, col = pal(20))
-```
+
