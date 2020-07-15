@@ -67,7 +67,7 @@ for (i in 1:length(uos_palettes)){
 
 
 ## Colour vision impairment
-These plots show how each of the palettes perform for different types of colour vision impairment (using dichromat). Palettes that perform best are "galah", "namatjira", "williams_pilbara", and "healthy_ _reef"  
+These plots show how each of the palettes perform for different types of colour vision impairment (using dichromat).
 
 ### Green-Blind (Deuteranopia)
 ```{r dichromate_deat, fig.height = 5}
@@ -121,11 +121,14 @@ plots: `scale_color_uos()` and `scale_fill_uos()` calling one of the palettes.
 Here the `marine` and `horizon5` palettes are used for a scatter plot of `mtcars` data.
 
 ```{r mtcars, echo = TRUE, message = FALSE}
+# Use the marine palette for colours
 p1 <- ggplot(mtcars, aes(mpg, wt)) + 
    geom_point(aes(colour = factor(cyl)), size=2, alpha=0.7) + 
    scale_colour_uos(palette="marine") +
     theme_bw() + 
     theme(aspect.ratio=1, legend.position="bottom")
+
+# Use the horizon palette for colours
 p2 <- ggplot(data = mpg) + 
    geom_point(mapping = aes(x = displ, y = hwy, color = class), alpha=0.7) +
    scale_colour_uos(palette="horizon") +
@@ -138,27 +141,30 @@ p1 + p2
 Here the default palette `marine` is used in a stacked bar chart using the `diamonds` data. 
 
 ```{r diamonds, echo=TRUE, message=FALSE}
- ggplot(diamonds) + geom_bar(aes(x = cut, fill = clarity)) +
-   scale_fill_uos() +  theme_bw() 
+ ggplot(diamonds) + 
+  geom_bar(aes(x = cut, fill = clarity)) +
+  scale_fill_uos() +  # defaults to marine
+  theme_bw() 
 ```
 
-It's possible, but messy to use pick any colour combination using `uos_cols()`,
-but the syntax requires extract the hex colour values using `unname()` and
+It's possible, but messy, to pick any colour combination using `uos_cols()`,
+but the syntax requires extracting the hex colour values using `unname()` and
 passing a vector of colour names as the index to `uos_cols()`
 
-The following shows the Palmer penguin data using
-`uos_cols()` as described by creating a new palette called `my_cols` 
+Here's an example with the Palmer penguin data using
+`uos_cols()` as described above by creating a new palette called `my_cols` 
 that is passed to `scale_colour_manual()`.
 
 ```{r maps, echo=TRUE, message=FALSE}
 # Create a new vector of colours to pass to scale_colour manual
+# Use unname() to get hex codes from uos_cols()
 my_cols <- unname(uos_cols()[c('black','shamrock','horizon4')])
 
 ggplot(data = penguins, aes(x = species, y = flipper_length_mm)) +
   geom_boxplot(aes(color = species), width = 0.3, show.legend = FALSE) +
   geom_jitter(aes(color = species), alpha = 0.7, show.legend = FALSE, 
               position = position_jitter(width = 0.2, seed = 0)) +
-  scale_colour_manual(values = my_cols) +
+  scale_colour_manual(values = my_cols) + # pass my_cols to scale_colour_manual
   theme_minimal() +
   labs(x = "Species",
        y = "Flipper length (mm)")
@@ -166,7 +172,7 @@ ggplot(data = penguins, aes(x = species, y = flipper_length_mm)) +
 
 Here is a base R `plot` using the `horizon` palette directly via the `colorRampPalette()` function.
 
-```{r base-plot}
+```{r base-plot, echo=TRUE}
 pal <- colorRampPalette(uos_palettes[["horizon"]])
 image(volcano, col = pal(20))
 ```
@@ -174,7 +180,7 @@ image(volcano, col = pal(20))
 Here is the same plot, but by creating a new palette from specific colours
 as with the penguin data.
 
-```{r base-plot-2}
+```{r base-plot-2, echo=TRUE}
 # Create new palette
 my_cols <- unname(uos_cols()[c('marine1','shamrock','horizon3')])
 
