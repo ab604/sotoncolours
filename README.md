@@ -15,8 +15,10 @@ or gradients:
   - `scale_fill_uos()`
   - `scale_colour_uos()`
 
-and the palettes can be called in the base plotting functions too. See
-examples below.
+and the palettes or specific colours can be called using `uos_cols()`
+and in the base plotting functions too.
+
+See examples below and more details in the vignette.
 
 ## Installation
 
@@ -24,7 +26,11 @@ Use can install from github using `devtools`. Run
 `install.packages("devtools")` if necessary first.
 
 ``` r
-devtools::install_github("ab604/sotoncolours")
+devtools::install_github("ab604/sotoncolours", build_vignettes = TRUE)
+```
+
+``` r
+vignette("sotoncolours")
 ```
 
 and then load the library as usual:
