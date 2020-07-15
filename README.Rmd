@@ -31,8 +31,13 @@ Use can install from github using `devtools`. Run `install.packages("devtools")`
 if necessary first.
 
 ```{r installation, eval=FALSE}
-devtools::install_github("ab604/sotoncolours")
+devtools::install_github("ab604/sotoncolours", build_vignettes = TRUE)
 ```
+
+```{r vignette,eval=FALSE}
+vignette("sotoncolours")
+```
+
 
 and then load the library as usual:
 

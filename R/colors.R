@@ -1,5 +1,4 @@
 #' University of Southampton colour palettes
-#' A.Bailey 2020-07-10
 #'
 #' A collection of colour palettes using the University of Southampton colour
 #' scheme. The list of available palettes is:

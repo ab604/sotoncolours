@@ -21,6 +21,5 @@ Suggests: knitr,
     patchwork,
     palmerpenguins,
     raster,
-    gridExtra,
-    qpdf
+    gridExtra
 VignetteBuilder: knitr

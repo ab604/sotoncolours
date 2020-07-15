@@ -3,8 +3,7 @@
 \docType{data}
 \name{uos_colours}
 \alias{uos_colours}
-\title{University of Southampton colour palettes
-A.Bailey 2020-07-10}
+\title{University of Southampton colour palettes}
 \format{
 An object of class \code{character} of length 19.
 }
