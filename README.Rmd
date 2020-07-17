@@ -117,7 +117,7 @@ Here's an example with the Palmer penguin data using
 above by creating  a new palette called `my_cols` that is passed to the
 `values` argument of `scale_colour_manual()`.
 
-```{r maps, echo=TRUE, message=FALSE}
+```{r boxplot, echo=TRUE, message=FALSE,warning=FALSE}
 # Create a new vector of colours to pass to scale_colour manual
 # Use unname() to get hex codes from uos_cols()
 my_cols <- unname(uos_colours[c("black","shamrock","horizon4")])

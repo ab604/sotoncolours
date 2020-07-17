@@ -40,14 +40,9 @@ The package contains 19 colours and 7 colour palettes contained within
 a named character vector called `uos_colours`:
 
 <<<<<<< HEAD
-```{r colours}
+```{r colours_vec}
 # Named character vector of the colours
 uos_colours
-=======
-```{r colours, echo=TRUE}
-# Names of the colours
-names(uos_cols())
->>>>>>> 3df2cc30d69efbecb3728e9335bb5d616567273b
 ```
 
 
@@ -168,7 +163,7 @@ Here's an example with the Palmer penguin data using
 above by creating  a new palette called `my_cols` that is passed to the
 `values` argument of `scale_colour_manual()`.
 
-```{r maps, echo=TRUE, message=FALSE}
+```{r boxplot, echo=TRUE, message=FALSE,warning=FALSE}
 # Create a new vector of colours to pass to scale_colour manual
 # Use unname() to get hex codes from uos_cols()
 my_cols <- unname(uos_colours[c("black","shamrock","horizon4")])

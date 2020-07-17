@@ -147,8 +147,4 @@ ggplot(data = penguins, aes(x = species, y = flipper_length_mm)) +
        y = "Flipper length (mm)")
 ```
 
-    ## Warning: Removed 2 rows containing non-finite values (stat_boxplot).
-
-    ## Warning: Removed 2 rows containing missing values (geom_point).
-
-![](README_files/figure-gfm/maps-1.png)<!-- -->
+![](README_files/figure-gfm/boxplot-1.png)<!-- -->
