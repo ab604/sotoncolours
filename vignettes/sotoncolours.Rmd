@@ -14,14 +14,13 @@ knitr::opts_chunk$set(fig.width = 7,
                       message=FALSE)
 ```
 
-```{r}
+```{r set-up, echo=TRUE}
 library(tidyverse)
 library(sotoncolours)
 library(dichromat)
 library(colorspace)
 library(palmerpenguins)
 library(raster)
-library(gridExtra)
 library(patchwork)
 ```
 
@@ -31,8 +30,8 @@ The [**sotoncolours**](https://github.com/ab604/sotoncolours) package contains c
 
 # Installation
 
-```{r install, eval=FALSE}
-devtools::install_github("ab604/sotoncolours")
+```{r install, eval=FALSE, echo=TRUE}
+devtools::install_github("ab604/sotoncolours", build_vignettes = TRUE)
 ```
 
 # Colour and palette choices
@@ -40,9 +39,15 @@ devtools::install_github("ab604/sotoncolours")
 The package contains 19 colours and 7 colour palettes contained within 
 a named character vector called `uos_colours`:
 
+<<<<<<< HEAD
 ```{r colours}
 # Named character vector of the colours
 uos_colours
+=======
+```{r colours, echo=TRUE}
+# Names of the colours
+names(uos_cols())
+>>>>>>> 3df2cc30d69efbecb3728e9335bb5d616567273b
 ```
 
 
@@ -66,11 +71,11 @@ for (i in 1:length(uos_palettes)){
 }
 ```
 
-
 ## Colour vision impairment
 These plots show how each of the palettes perform for different types of colour vision impairment (using dichromat).
 
 ### Green-Blind (Deuteranopia)
+
 ```{r dichromate_deat, fig.height = 5}
 par(mfrow=c(length(uos_palettes)/2, 2), lheight = 2, mar=rep(1, 4), adj = 0)
 for (i in 1:length(uos_palettes)){
@@ -80,6 +85,7 @@ for (i in 1:length(uos_palettes)){
 
 
 ### Red-Blind (Protanopia)
+
 ```{r dichromate_protan, fig.height = 5}
 par(mfrow=c(length(uos_palettes)/2, 2), lheight = 2, mar=rep(1, 4), adj = 0)
 for (i in 1:length(uos_palettes)){
@@ -89,6 +95,7 @@ for (i in 1:length(uos_palettes)){
 
 
 ### Blue-Blind (Tritanopia)
+
 ```{r dichromate_tritan, fig.height = 5}
 par(mfrow=c(length(uos_palettes)/2, 2), lheight = 2, mar=rep(1, 4), adj = 0)
 for (i in 1:length(uos_palettes)){
@@ -98,6 +105,7 @@ for (i in 1:length(uos_palettes)){
 
 
 ### Desaturated
+
 ```{r desaturate, fig.height = 5}
 par(mfrow=c(length(uos_palettes)/2, 2), lheight = 2, mar=rep(1, 4), adj = 0)
 for (i in 1:length(uos_palettes)){
@@ -110,7 +118,7 @@ for (i in 1:length(uos_palettes)){
 Colours can be called directly using `uos_cols()` with a character argument
 for the colour name e.g. `"horizon5"`.
 
-```{r}
+```{r, echo=TRUE}
 ggplot(mtcars, aes(hp, mpg)) +
     geom_point(color = uos_cols("horizon5"),
                size = 4, alpha = .8)
