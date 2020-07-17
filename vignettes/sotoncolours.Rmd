@@ -37,11 +37,12 @@ devtools::install_github("ab604/sotoncolours")
 
 # Colour and palette choices
 
-The package contains 19 colours and 7 colour palettes.
+The package contains 19 colours and 7 colour palettes contained within 
+a named character vector called `uos_colours`:
 
 ```{r colours}
-# Names of the colours
-names(uos_cols())
+# Named character vector of the colours
+uos_colours
 ```
 
 
@@ -147,18 +148,22 @@ Here the default palette `marine` is used in a stacked bar chart using the `diam
   theme_bw() 
 ```
 
-It's possible, but messy, to pick any colour combination using `uos_cols()`,
-but the syntax requires extracting the hex colour values using `unname()` and
-passing a vector of colour names as the index to `uos_cols()`
+It's possible, but messy, to pick any colour combination from `uos_colours`,
+but the syntax requires extracting the hex codes using `unname()` and subsetting
+`uos_cols` using a character vector of the desired colour names.
+
+It may be easier to create an object for any bespoke palette and pass then
+pass it to the respective `ggplot` function.
 
 Here's an example with the Palmer penguin data using
-`uos_cols()` as described above by creating a new palette called `my_cols` 
-that is passed to `scale_colour_manual()`.
+`unname(uos_colours[c("black","shamrock","horizon4")])` as described 
+above by creating  a new palette called `my_cols` that is passed to the
+`values` argument of `scale_colour_manual()`.
 
 ```{r maps, echo=TRUE, message=FALSE}
 # Create a new vector of colours to pass to scale_colour manual
 # Use unname() to get hex codes from uos_cols()
-my_cols <- unname(uos_cols()[c('black','shamrock','horizon4')])
+my_cols <- unname(uos_colours[c("black","shamrock","horizon4")])
 
 ggplot(data = penguins, aes(x = species, y = flipper_length_mm)) +
   geom_boxplot(aes(color = species), width = 0.3, show.legend = FALSE) +
@@ -172,7 +177,7 @@ ggplot(data = penguins, aes(x = species, y = flipper_length_mm)) +
 
 Here is a base R `plot` using the `horizon` palette directly via the `colorRampPalette()` function.
 
-```{r base-plot, echo=TRUE}
+```{r base-plot, height = 8, echo=TRUE}
 pal <- colorRampPalette(uos_palettes[["horizon"]])
 image(volcano, col = pal(20))
 ```
@@ -180,7 +185,7 @@ image(volcano, col = pal(20))
 Here is the same plot, but by creating a new palette from specific colours
 as with the penguin data.
 
-```{r base-plot-2, echo=TRUE}
+```{r base-plot-2, height = 8, echo=TRUE}
 # Create new palette
 my_cols <- unname(uos_cols()[c('marine1','shamrock','horizon3')])
 

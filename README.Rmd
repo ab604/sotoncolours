@@ -20,8 +20,8 @@ It has two functions for use with `ggplot2`, either as discrete colours or gradi
 + `scale_fill_uos()`
 + `scale_colour_uos()`
 
-and the palettes or specific colours can be called using `uos_cols()` and in the 
-base plotting functions too. 
+and the palettes or specific colours can be called using `uos_cols()` and/or 
+`uos_colours`. Colours can be used in the base plotting functions too. 
 
 See examples below and more details in the vignette.
 
@@ -43,6 +43,22 @@ and then load the library as usual:
 
 ```{r load-lib, eval=FALSE}
 library(sotoncolours)
+```
+
+## Colour and palette choices
+
+The package contains 19 colours and 7 colour palettes contained within 
+a named character vector called `uos_colours`:
+
+```{r colours}
+# Named character vector of the colours
+uos_colours
+```
+
+
+```{r palettes, echo=TRUE}
+# See names of all palettes
+names(uos_palettes)
 ```
 
 ## The palettes
@@ -78,7 +94,7 @@ ggplot(data = penguins, aes(x = flipper_length_mm)) +
 
 Here is a base R `plot` using the `horizon` palette directly via the `colorRampPalette()` function.
 
-```{r base-plot}
+```{r base-plot, height = 8}
 pal <- colorRampPalette(uos_palettes[["horizon"]])
 image(volcano, col = pal(20))
 ```
@@ -87,4 +103,31 @@ Individual palettes can be visualised using the `viz_palette` function
 
 ```{r}
 viz_palette(uos_palettes[["marine"]])
+```
+
+It's possible, but messy, to pick any colour combination from `uos_colours`,
+but the syntax requires extracting the hex codes using `unname()` and subsetting
+`uos_cols` using a character vector of the desired colour names.
+
+It may be easier to create an object for any bespoke palette and pass then
+pass it to the respective `ggplot` function.
+
+Here's an example with the Palmer penguin data using
+`unname(uos_colours[c("black","shamrock","horizon4")])` as described 
+above by creating  a new palette called `my_cols` that is passed to the
+`values` argument of `scale_colour_manual()`.
+
+```{r maps, echo=TRUE, message=FALSE}
+# Create a new vector of colours to pass to scale_colour manual
+# Use unname() to get hex codes from uos_cols()
+my_cols <- unname(uos_colours[c("black","shamrock","horizon4")])
+
+ggplot(data = penguins, aes(x = species, y = flipper_length_mm)) +
+  geom_boxplot(aes(color = species), width = 0.3, show.legend = FALSE) +
+  geom_jitter(aes(color = species), alpha = 0.7, show.legend = FALSE, 
+              position = position_jitter(width = 0.2, seed = 0)) +
+  scale_colour_manual(values = my_cols) + # pass my_cols to scale_colour_manual
+  theme_minimal() +
+  labs(x = "Species",
+       y = "Flipper length (mm)")
 ```
